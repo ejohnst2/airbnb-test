@@ -1,0 +1,11 @@
+.marker {
+  background-color: white;
+  height: 20px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  padding: 2px;
+}
+.marker:hover {
+  font-weight: bold;
+}

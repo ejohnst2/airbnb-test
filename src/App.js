@@ -1,5 +1,7 @@
 import React from 'react';
 import Flat from './components/flat'
+import GoogleMapReact from 'google-map-react'
+import Marker from './components/marker'
 import './App.css';
 
 class App extends React.Component {
@@ -8,6 +10,7 @@ class App extends React.Component {
     this.state = {
       flats: []
     }
+    this.handleClick = this.handleClick.bind(this)
   };
   componentDidMount() {
     fetch("https://raw.githubusercontent.com/lewagon/flats-boilerplate/master/flats.json")
@@ -18,7 +21,14 @@ class App extends React.Component {
         })
       })
   }
+  handleClick() {
+    console.log("this was clicked")
+  }
   render() {
+    let center = {
+      lat: 48.8566, lng: 2.3522
+    };
+
     return (
       <div className="app">
         <div className="main">
@@ -27,11 +37,16 @@ class App extends React.Component {
           </div>
           <div className="flats">
             {this.state.flats.map((flat) => {
-              return <Flat key={flat.id} flat={flat} />
+              return <Flat key={flat.id} flat={flat} onClick={this.handleClick} />
             })}
           </div>
         </div>
         <div className="map">
+          <GoogleMapReact zoom={14} center={center} >
+          {this.state.flats.map((flat) => {
+            return <Marker {...flat} />
+          })}
+          </GoogleMapReact>
         </div>
       </div>
     );
