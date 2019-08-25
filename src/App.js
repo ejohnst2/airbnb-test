@@ -1,26 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
+import Flat from './components/flat'
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      flats: []
+    }
+  };
+  componentDidMount() {
+    fetch("https://raw.githubusercontent.com/lewagon/flats-boilerplate/master/flats.json")
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          flats: data
+        })
+      })
+  }
+  render() {
+    return (
+      <div className="app">
+        <div className="main">
+          <div className="search">
+            <input type="text" placeholder="search a flat" />
+          </div>
+          <div className="flats">
+            {this.state.flats.map((flat) => {
+              return <Flat key={flat.id} flat={flat} />
+            })}
+          </div>
+        </div>
+        <div className="map">
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
