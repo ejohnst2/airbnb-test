@@ -9,3 +9,7 @@
 .marker:hover {
   font-weight: bold;
 }
+.marker.selected {
+  font-weight: bold;
+  background-color: gold;
+}
