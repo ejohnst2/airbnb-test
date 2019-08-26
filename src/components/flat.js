@@ -3,6 +3,7 @@ import './flat.css'
 
 class Flat extends React.Component {
   handleClick = () => {
+    console.log(this)
     this.props.selectFlat(this.props.flat)
   }
   render() {

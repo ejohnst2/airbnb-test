@@ -26,7 +26,6 @@ class App extends React.Component {
   }
 
   selectFlat = (flat) => {
-    console.log(flat);
     this.setState({
       selectedFlat: flat
     })
